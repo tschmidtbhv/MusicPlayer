@@ -26,19 +26,33 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll" />
 
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@android:color/holo_orange_dark"
+                app:layout_scrollFlags="snap"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="@android:color/white" />
+
         </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <FrameLayout
                 android:id="@+id/viewHolder"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-
+        </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>
 
     <include layout="@layout/player" />
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
