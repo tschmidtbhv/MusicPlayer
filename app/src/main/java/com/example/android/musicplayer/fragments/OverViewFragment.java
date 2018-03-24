@@ -47,11 +47,10 @@ public class OverViewFragment extends Fragment {
 
     /**
      * Setup the RecyclerView with the dummy data
+     *
      * @param view
      */
     private void setUpRecyclerView(View view) {
-
-        Toast.makeText(getActivity(),"onActivityCreated with items: " +albums.size(), Toast.LENGTH_SHORT).show();
 
         recyclerView = view.findViewById(R.id.overview_recyler);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), Config.NUMBEROFOVERVIWECOLUMNS));
@@ -61,5 +60,4 @@ public class OverViewFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
-
 }

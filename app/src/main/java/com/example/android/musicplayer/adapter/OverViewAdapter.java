@@ -3,28 +3,21 @@ package com.example.android.musicplayer.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.example.android.musicplayer.R;
 import com.example.android.musicplayer.activity.AlbumActivity;
 import com.example.android.musicplayer.data.Album;
+import com.example.android.musicplayer.helper.AlbumHelper;
 import com.example.android.musicplayer.helper.Config;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ithom on 20.03.2018.
@@ -35,7 +28,7 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
     ArrayList<Album> albums;
     OnAlbumSelectedListener albumSelectedListener;
 
-    public interface OnAlbumSelectedListener{
+    public interface OnAlbumSelectedListener {
         public void onAlbumSelected(Album album);
     }
 
@@ -59,7 +52,6 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
 
     @Override
     public OverViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.v(OverViewAdapter.class.getSimpleName(),"onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.overview_item, parent, false);
         albumSelectedListener = (OnAlbumSelectedListener) parent.getContext();
         return new ViewHolder(view);
@@ -74,7 +66,7 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String json = createGSONFromObject(album);
+                String json = AlbumHelper.createGSONFromObject(album);
                 Intent intent = new Intent(context, AlbumActivity.class);
                 intent.putExtra(Config.ALBUM, json);
                 context.startActivity(intent);
@@ -85,23 +77,10 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, context.getString(R.string.play_clicked),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.play_clicked), Toast.LENGTH_SHORT).show();
                 albumSelectedListener.onAlbumSelected(album);
             }
         });
-    }
-
-    /**
-     * Create JSON String from given album
-     * @param album
-     * @return
-     */
-    private String  createGSONFromObject(Album album){
-
-        Gson gson = new Gson();
-        String json =  gson.toJson(album);
-        Log.v(OverViewAdapter.class.getSimpleName(), "JSON: " + json);
-        return json;
     }
 
     @Override

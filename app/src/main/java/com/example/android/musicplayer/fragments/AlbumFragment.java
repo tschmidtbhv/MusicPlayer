@@ -38,15 +38,9 @@ public class AlbumFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupAlbumInfos();
-    }
 
-    private void setupAlbumInfos() {
-        if(album != null){
-            ImageView imageView = getActivity().findViewById(R.id.albumImage);
-            imageView.setImageResource(album.getAlbumImageResId());
-
-        }
+        ImageView imageView = getActivity().findViewById(R.id.albumImage);
+        imageView.setImageResource(album.getAlbumImageResId());
     }
 
     /**
@@ -64,6 +58,4 @@ public class AlbumFragment extends Fragment {
         AlbumAdapter adapter = new AlbumAdapter(album);
         recyclerView.setAdapter(adapter);
     }
-
-
 }

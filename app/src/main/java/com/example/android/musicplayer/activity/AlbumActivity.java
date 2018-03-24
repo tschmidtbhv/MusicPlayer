@@ -22,23 +22,30 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
 
-        playButton = findViewById(R.id.floatingplayButton);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"play was clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Bundle bundle = getIntent().getExtras();
-        setUpAlbumInfos(bundle);
-        setUpFragment(bundle);
+        if (bundle != null) {
+
+            final Album album = AlbumHelper.getAlbumFromJSON(bundle);
+            playButton = findViewById(R.id.floatingplayButton);
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.now_playing_album, album.getAlbumName()), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            setUpAlbumInfos(album);
+            setUpFragment(bundle);
+        }
     }
 
-    private void setUpAlbumInfos(Bundle bundle) {
+    /**
+     * Setup Album Infos
+     * @param album
+     */
+    private void setUpAlbumInfos(Album album) {
 
-        Album album = AlbumHelper.getAlbumFromJSON(bundle);
-        if(album != null) {
+        if (album != null) {
             TextView albumName = findViewById(R.id.albumName);
             TextView albumArtist = findViewById(R.id.albumArtist);
 
@@ -47,6 +54,11 @@ public class AlbumActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initial Fragment Setup
+     *
+     * @param bundle contains album as a JSON String
+     */
     private void setUpFragment(Bundle bundle) {
         AlbumFragment albumFragment = new AlbumFragment();
         albumFragment.setArguments(bundle);

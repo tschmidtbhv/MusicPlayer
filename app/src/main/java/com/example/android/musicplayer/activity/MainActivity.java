@@ -3,13 +3,13 @@ package com.example.android.musicplayer.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.musicplayer.R;
 import com.example.android.musicplayer.adapter.OverViewAdapter;
@@ -18,7 +18,7 @@ import com.example.android.musicplayer.fragments.OverViewFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 
-public class MainActivity extends AppCompatActivity implements SlidingUpPanelLayout.PanelSlideListener , OverViewAdapter.OnAlbumSelectedListener{
+public class MainActivity extends AppCompatActivity implements SlidingUpPanelLayout.PanelSlideListener, OverViewAdapter.OnAlbumSelectedListener {
 
     SlidingUpPanelLayout slidingUpPanelLayout;
     Button topPlayButton;
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements SlidingUpPanelLay
         }
     }
 
+    /**
+     * Initial Layout Setup
+     */
     private void setUpLayout() {
         setReferences();
 
@@ -89,6 +92,28 @@ public class MainActivity extends AppCompatActivity implements SlidingUpPanelLay
         slidingUpPanelLayout.addPanelSlideListener(this);
         topPlayButton.setOnClickListener(playOnClickListener);
         miniPlayButton.setOnClickListener(playOnClickListener);
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createToast(getString(R.string.previous_clicked));
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createToast(getString(R.string.next_clicked));
+            }
+        });
+    }
+
+    /**
+     * Create Toast with given message
+     * @param message
+     */
+    private void createToast(String message){
+        Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -98,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SlidingUpPanelLay
 
         slidingUpPanelLayout = findViewById(R.id.sliding_layout);
         topPlayButton = findViewById(R.id.topPlayButton);
-        miniPlayButton =  findViewById(R.id.miniPlayButton);
+        miniPlayButton = findViewById(R.id.miniPlayButton);
         previousButton = findViewById(R.id.previousButton);
         nextButton = findViewById(R.id.nextButton);
 
@@ -114,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements SlidingUpPanelLay
     @Override
     public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
 
+        //Check is slider open / closed and change visibility for playButton
         if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
             topPlayButton.setVisibility(View.GONE);
         } else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
@@ -124,11 +150,12 @@ public class MainActivity extends AppCompatActivity implements SlidingUpPanelLay
     /**
      * Album was selected
      * Play the album
+     *
      * @param album
      */
     @Override
     public void onAlbumSelected(Album album) {
-        if(!isPlaying) {
+        if (!isPlaying) {
             changePlayState();
             slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         }
