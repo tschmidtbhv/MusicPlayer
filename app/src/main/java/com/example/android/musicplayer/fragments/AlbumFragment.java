@@ -38,7 +38,7 @@ public class AlbumFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-       setupAlbumInfos();
+        setupAlbumInfos();
     }
 
     private void setupAlbumInfos() {

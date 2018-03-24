@@ -17,7 +17,7 @@ import com.example.android.musicplayer.data.Song;
  * Created by ithom on 21.03.2018.
  */
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>{
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -40,6 +40,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public AlbumAdapter(Album album){
         this.album = album;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

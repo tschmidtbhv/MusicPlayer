@@ -33,6 +33,11 @@ import java.util.List;
 public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHolder> {
 
     ArrayList<Album> albums;
+    OnAlbumSelectedListener albumSelectedListener;
+
+    public interface OnAlbumSelectedListener{
+        public void onAlbumSelected(Album album);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -56,13 +61,13 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
     public OverViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.v(OverViewAdapter.class.getSimpleName(),"onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.overview_item, parent, false);
-
+        albumSelectedListener = (OnAlbumSelectedListener) parent.getContext();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Log.v(OverViewAdapter.class.getSimpleName(), albums.get(position).getAlbumName());
+
         final Context context = holder.itemView.getContext();
         final Album album = albums.get(position);
 
@@ -81,6 +86,7 @@ public class OverViewAdapter extends RecyclerView.Adapter<OverViewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, context.getString(R.string.play_clicked),Toast.LENGTH_SHORT).show();
+                albumSelectedListener.onAlbumSelected(album);
             }
         });
     }

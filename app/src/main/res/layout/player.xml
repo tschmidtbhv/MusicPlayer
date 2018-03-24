@@ -6,20 +6,19 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/albumImage"
+        android:id="@+id/miniplayerImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/album_1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="72dp"
         android:alpha="0.8"
         android:background="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,21 +36,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/songtitle"
-        tools:text="SongTitle"
+        android:id="@+id/miniplayerSongtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textAlignment="center"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="SongTitle" />
 
     <Button
-        android:id="@+id/topplaybutton"
+        android:id="@+id/topPlayButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/nextButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="46dp"
         android:layout_height="46dp"
@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/previousButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="46dp"
         android:layout_height="46dp"
@@ -90,7 +90,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/miniPlayButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="46dp"
         android:layout_height="46dp"
@@ -101,7 +101,7 @@
         android:background="@drawable/ic_play_circle_filled_white_24dp"
         android:backgroundTint="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/nextButton"
+        app:layout_constraintStart_toEndOf="@+id/previousButton"
         app:layout_constraintTop_toTopOf="@+id/view2" />
 </android.support.constraint.ConstraintLayout>
