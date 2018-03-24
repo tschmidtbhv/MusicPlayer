@@ -24,8 +24,6 @@ public class AlbumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_album);
         setUpActionBar();
 
-
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 
